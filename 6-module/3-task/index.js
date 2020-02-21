@@ -26,6 +26,44 @@ class Menu {
   `;
 
   constructor(element) {
+    this.el = element;
+    this.el.innerHTML = this.template;
+
+    const mainItems = this.el.querySelectorAll(".list-group-item");
+    for(const item of mainItems)
+    {
+      item.addEventListener("pointerenter", this.onenter.bind(this));
+      item.addEventListener("pointerleave", this.onleave.bind(this)); 
+      //item.addEventListener("onclick", this.onclick.bind(this)); 
+    }
+
+    this.el.querySelector(".list-group").addEventListener("onclick", this.onclick.bind(this)); 
+
+  }
+
+  onenter(event)
+  {
+    event.target.querySelector(".dropdown-menu").classList.add("show");
+    document.querySelector(".backdrop").classList.add("show");
+  }
+
+  onleave(event)
+  {
+    event.target.querySelector(".dropdown-menu").classList.remove("show");
+    document.querySelector(".backdrop").classList.remove("show");
+  }
+
+  onclick(event)
+  {
+    if(!event.target.classList.contains("dropdown-item"))
+      return;
+
+    this.select(event.target.dataset.id);
+  }
+
+  select(id)
+  {
+
   }
 }
 
