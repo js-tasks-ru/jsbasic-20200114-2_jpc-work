@@ -34,7 +34,6 @@ class Menu {
     {
       item.addEventListener("pointerenter", this.onenter.bind(this));
       item.addEventListener("pointerleave", this.onleave.bind(this)); 
-      //item.addEventListener("onclick", this.onclick.bind(this)); 
     }
 
     this.el.querySelector(".list-group").addEventListener("onclick", this.onclick.bind(this)); 
@@ -58,13 +57,10 @@ class Menu {
     if(!event.target.classList.contains("dropdown-item"))
       return;
 
-    this.select(event.target.dataset.id);
+    const selectEvent = new CustomEvent("select", {detail:{id: event.target.dataset.id}});
+    event.target.dispathEvent(selectEvent);
   }
 
-  select(id)
-  {
-
-  }
 }
 
 // Делает класс доступным глобально, сделано для упрощения, чтобы можно было его вызывать из другого скрипта
